@@ -35,6 +35,29 @@ namespace CS_MySQL_Konzol_DEMO
                     Console.WriteLine("{0}. Felhasználónév: {1}  Jelszó: {2}", id, user, pass);
                 }
                 reader.Close();
+
+                command.CommandText = "SELECT MIN(id) FROM felhasznalok";
+                int min = (int)command.ExecuteScalar();
+                command.CommandText = "SELECT MAX(id) FROM felhasznalok";
+                int max = (int)command.ExecuteScalar();
+
+                Random rnd = new Random();
+
+                int rid = rnd.Next(min, max + 1);
+
+                command.CommandText = "SELECT * FROM felhasznalok WHERE id = @id";
+                command.Parameters.AddWithValue("@id", rid);
+
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    string user = (string)reader["user"];
+                    string pass = (string)reader["pwd"];
+
+                    Console.WriteLine("Felhasználónév: {0}  Jelszó: {1}",user, pass);
+                }
+                reader.Close();
+
                 conn.Close();
             }
             catch (Exception ex)
