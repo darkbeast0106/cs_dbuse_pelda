@@ -16,7 +16,7 @@ namespace CS_MySQL_Konzol_DEMO
                 string connstring = "Server=localhost;Database=cs_pelda_db;Uid=root;Password=;";
                 var conn = new MySqlConnection(connstring);
                 conn.Open();
-                string sql = "SELECT * FROM felhasznalok";
+                string sql = "SELECT * FROM felhasznalok ORDER BY user LIMIT 2";
 
                 var command = conn.CreateCommand();
                 command.CommandText = sql;
@@ -34,6 +34,7 @@ namespace CS_MySQL_Konzol_DEMO
 
                     Console.WriteLine("{0}. Felhasználónév: {1}  Jelszó: {2}", id, user, pass);
                 }
+
                 reader.Close();
                 conn.Close();
             }
