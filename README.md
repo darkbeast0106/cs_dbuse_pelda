@@ -1,2 +1,2 @@
-# cs_dbuse_pelda
+# C# adatbáziskezelés mintaprogram
 Egyszerű példaprogram a MySQL használatához c#-al.
